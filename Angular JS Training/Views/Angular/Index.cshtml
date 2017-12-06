@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@* Declare Styles *@
+<style>
+
+</style>
+<h2>Angular JS</h2>
+<hr />
+<div ng-app="testing-demo">
+    <div ng-controller="testing-controller">
+
+        @* Ng-Model is used to Bind Input Controls Aka 2 way Bind *@
+        <p><input type="text" ng-model="firstName" class="form-control" /></p>
+
+        @* Ng-Bind is used to bind outpur elements only divs spans etc 1 way binding *@
+        <p>Full Name by ng-Bind : <span ng-bind='firstName+lastName'></span></p>
+
+        @* Ng-Bind is used to bind outpur elements only divs spans etc 1 way binding *@
+        <p>Full Name by Parenthesis : {{firstName+" "+lastName}}</p>
+
+        @* Expressions *@
+        <p>{{25*5}}</p>
+
+        @* Manipulating Css Class*@
+        <p>
+            @* Bootstrap alert *@
+            <div class='alert {{currentAlert}}'>
+                <strong>Success!</strong> Indicates a successful or positive action.
+            </div>
+        </p>
+
+        @* Manipulating Style Element *@
+        <p class="form-control" style="background-color:{{backgroundColor}};color:{{textColor}}">Text CSS Controller by Angular</p>
+
+        @* JS Objects *@
+        <div class="well">
+            <p><b>JS Object</b></p>
+            <p>Name : {{student.Name}}</p>
+            <p>Grade : {{student.Grade}}</p>
+            <p>Address : {{student.Address}}</p>
+        </div>
+
+        @* ng-repeat JS Arrays *@
+        <div class="well">
+            <p><b>JS Array</b></p>
+            <p ng-repeat="x in studentsArray">{{x}}</p>
+        </div>
+
+        @* Custom Directives *@
+        <joe></joe>
+        <p joe></p>
+        <p class="joe"></p>
+        <p>@* joe *@</p>
+
+        @* Validate User Input *@
+        <form class="well" name="validateDiv">
+            <p><input type="email" name="emailField" required class="form-control" ng-model="initialEmail" /></p>
+            <p>Pristine : {{validateDiv.emailField.$pristine}}</p>
+            <p>Valid : {{validateDiv.emailField.$valid}}</p>
+            <p>Touched : {{validateDiv.emailField.$touched}}</p>
+            <p>Dirty : {{validateDiv.emailField.$dirty}}</p>
+        </form>
+
+        @* ng-click method *@
+        <div class="" ng-click="clickEvent()">
+            <p>Demo for ng-Click</p>
+        </div>
+
+        @* ng-click with Index and ng-repeat *@
+        <div class="well">
+            <ul>
+                <li ng-repeat="x in studentsArray" ng-click="studentClicked(x)">
+                    {{x}}
+                </li>
+            </ul>
+        </div>
+
+        @* ng-repeat and click with duplicate values *@
+        <div class="well">
+            <ul>
+                @*<li ng-repeat="x in studentDuplicate track by $index" ng-click="studentClicked(x)">{{x}}</li>*@
+                <li ng-repeat="x in studentDuplicate track by $index" ng-click="studentClicked(studentDuplicate[$index])">{{x}}</li>
+            </ul>
+        </div>
+
+        @* Root Scope *@
+        <div class="well">
+            <p>{{color}}</p>
+        </div>
+
+        @* Simple Filters *@
+        <p>{{firstName|uppercase}}</p>
+
+        @* Filters on ng-repeat *@
+        <div class="well">
+            <ul>
+                <li ng-repeat="x in studentsArray |orderBy:x">{{x}}</li>
+            </ul>
+        </div>
+
+        @* Filter based on input *@
+        <div class="well">
+            <p>
+                <input type="text" class="form-control" ng-model="searchKeyword" />
+            </p>
+            <ul>
+                <li ng-repeat="x in studentsArray|filter:searchKeyword">{{x}}</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/Angular/Modules/testing-demo.js"></script>
+    <script src="~/Scripts/Angular/Controllers/testing-controller.js"></script>
+}
